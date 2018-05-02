@@ -1,0 +1,36 @@
+<h2>Transmitted Data</h2>
+<pre id="transmitted-data" style="overflow: scroll; width: 500px;height: 200px; background: #ccc"></pre>
+
+<pre id="single-transmitted-data" style="overflow: scroll; width: 500px;height: 200px; background: #ccc"></pre>
+<input type="text" name="single-car-id" id="single-car-id" placeholder="car-1">
+<input type="number" name="location-limit" id="location-limit" placeholder="50">
+<button id="single-car-button">Get Single Data</button>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+   $(document).ready(() => {
+        const roomNumber = 'cars';
+        const socket = io.connect('http://localhost:3000');
+        socket.emit('join', { room: 'cars' }, data => {
+            console.log(data)
+            socket.on('list', data => {
+                console.log(data)
+            })
+            socket.on('getClientData', data => {
+                $('#transmitted-data').prepend(`${JSON.stringify(data)}<br>`)
+            });
+
+            $('#single-car-button').click(() => {
+                const id = $('#single-car-id').val();
+                const limit = $('#location-limit').val();
+                if (id && limit) {
+                    socket.emit('getSingleData', { id, limit }, data => {
+                        $('#single-transmitted-data').prepend(`${JSON.stringify(data)}<br>`)
+                    })
+                }
+            })
+        })
+    });
+</script>
