@@ -41,15 +41,15 @@ function getLast({ id, limit = 0 }) {
 
 // simple html pages
 app.get("/", (req, res) => {
-    res.sendFile(`${__dirname}/index.html`);
+    res.sendFile(`${__dirname}/views/index.html`);
 });
 
 app.get("/user", (req, res) => {
-  res.sendFile(`${__dirname}/user.html`);
+  res.sendFile(`${__dirname}/views/user.html`);
 });
 
 app.get("/listener", (req, res) => {
-  res.sendFile(`${__dirname}/listener.html`);
+  res.sendFile(`${__dirname}/views/listener.html`);
 });
 
 // socket controller
