@@ -14,14 +14,16 @@
         const roomNumber = 'cars';
         const socket = io.connect('http://localhost:3000');
         socket.emit('join', { room: 'cars' }, data => {
-            console.log(data)
+            // get all connected user list on the room
             socket.on('list', data => {
                 console.log(data)
             })
+            // get all connected cars
             socket.on('getClientData', data => {
                 $('#transmitted-data').prepend(`${JSON.stringify(data)}<br>`)
             });
-
+            
+            // get one specific car with limit
             $('#single-car-button').click(() => {
                 const id = $('#single-car-id').val();
                 const limit = $('#location-limit').val();
