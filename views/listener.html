@@ -12,7 +12,7 @@
 <script>
    $(document).ready(() => {
         const roomNumber = 'cars';
-        const socket = io.connect('http://localhost:3000');
+        const socket = io.connect();
         socket.emit('join', { room: 'cars' }, data => {
             // get all connected user list on the room
             socket.on('list', data => {
